@@ -5,13 +5,14 @@ import com.metaphore.tasks.app.web.model.TaskModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("api/v1/tasks")
+@RequiredArgsConstructor
 public class TaskController {
     @Autowired
     private TaskService taskService;
@@ -20,8 +21,23 @@ public class TaskController {
             @ApiResponse(code = 400, message = "Model Error"),
             @ApiResponse(code = 409, message = "Controled Error, in 'statusmessage' is the reason"),
             @ApiResponse(code = 500, message = "Server Error.") })
-    @PostMapping(value="tasks")
-    public ResponseEntity<Boolean> createTask(@RequestBody TaskModel task){
+    @PostMapping
+    public ResponseEntity<?> createTask(@RequestBody TaskModel task){
         return taskService.createTask(task);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> consultTask(@RequestBody TaskModel task){
+        return taskService.consultTask(task);
+    }
+
+    @PatchMapping
+    public ResponseEntity<?> updateTask(@RequestBody TaskModel task){
+        return taskService.updateTask(task);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteTask(@RequestBody TaskModel task){
+        return taskService.deleteTask(task);
     }
 }

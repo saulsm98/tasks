@@ -1,10 +1,16 @@
 package com.metaphore.tasks.app.domain.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
-
+@Setter
+@Getter
 @Table(name = "tasks")
+@Entity
+@NoArgsConstructor
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
