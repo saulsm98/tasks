@@ -1,21 +1,22 @@
 package com.metaphore.tasks.app.domain.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 @Setter
 @Getter
 @Table(name = "tasks")
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+
     @Column(name = "name_task")
     private String nameTask;
     @Column
